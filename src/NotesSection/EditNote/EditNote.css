@@ -49,3 +49,71 @@
     padding: 10px 10px;
     cursor: pointer
 }
+
+.notepad {
+    font-family: Arial, sans-serif;
+}
+
+.note {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.editing {
+    background-color: #f0f0f0;
+}
+
+.editing-container {
+    padding: 10px;
+}
+
+.title-input,
+.details-input {
+    width: 100%;
+    padding: 5px;
+    font-size: inherit;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+}
+
+
+.delete-button {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.save-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.view-mode {
+    cursor: pointer;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.details {
+    font-size: 16px;
+}

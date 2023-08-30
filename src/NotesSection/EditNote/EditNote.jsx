@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import UseNotes from '../../Hooks/UseNotes';
 import './EditNote.css'
-import { Spinner } from 'react-bootstrap';
+import { FormControl, Spinner } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { AiOutlineDelete } from 'react-icons/ai';
 import axios from 'axios';
 import { SaveAltOutlined, SaveAs } from '@mui/icons-material';
+import { TextField } from '@mui/material';
 
 const EditNote = () => {
     const { id } = useParams();
@@ -103,43 +104,50 @@ const EditNote = () => {
             })
     }
 
+    const [note, setNote] = React.useState({
+        editedDetails: '',
+    });
+
+    const HandleTextArea = (index, field, value) => {
+        setNote(prevState => ({
+            ...prevState,
+            [field]: value,
+        }));
+    };
+
     return (
-        <div className="notepad,  tiro-bangla">
+        <div className="notepad , tiro-bangla">
             {newData.map((note, index) => (
                 <div key={index} className={`note ${note.isEditing ? 'editing' : ''}`}>
                     {note.isEditing ? (
-                        <div style={{padding:'10px'}}>
+                        <div className="editing-container">
                             <input
                                 type="text"
                                 value={note.editedTitle}
                                 onChange={(e) => handleInputChange(index, 'editedTitle', e.target.value)}
                                 className="title-input"
                             />
+                           
                             <textarea
+                                multiline
+                                minRows={3}
+                                maxRows={10}
                                 value={note.editedDetails}
-                                onChange={(e) => handleInputChange(index, 'editedDetails', e.target.value)}
+                                onChange={(e) => HandleTextArea(0, 'editedDetails', e.target.value)}
                                 className="details-input"
+                                placeholder="Enter your note here"
                             />
-                            <button onClick={() => handleSaveClick(index)} className="save-button">
-                            <SaveAs/>
-                            </button>
-                            <button onClick={() => handleDelete(notes)} style={{
-                                marginRight: '20px',
-                                backgroundColor: '#ff4757',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '5px',
-                                padding: '10px 15px',
-                                fontSize: '16px',
-                                cursor: 'pointer',
-                                marginLeft:'20px',
-                                transition: 'background-color 0.3s ease',
-                            }}>
-                                <AiOutlineDelete></AiOutlineDelete>
-                            </button>
+                            <div className="buttons-container">
+                                <button onClick={() => handleSaveClick(index)} className="save-button">
+                                    <SaveAs />
+                                </button>
+                                <button onClick={() => handleDelete(notes)} className="delete-button">
+                                    <AiOutlineDelete />
+                                </button>
+                            </div>
                         </div>
                     ) : (
-                        <div onClick={() => handleEditClick(index)}>
+                        <div onClick={() => handleEditClick(index)} className="view-mode">
                             <div className="title">{note.title}</div>
                             <div className="details">{note.details}</div>
                         </div>
@@ -147,6 +155,7 @@ const EditNote = () => {
                 </div>
             ))}
         </div>
+
     );
 };
 

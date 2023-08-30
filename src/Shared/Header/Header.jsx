@@ -131,22 +131,28 @@ function Dashboard(props) {
                
                 {
                     user ?
-                        <div style={{ position: 'absolute', bottom: '30px', left: '50%', transform: 'translateX(-50%)' }}>
+                        <div style={{
+                            position: 'fixed',
+                            bottom: '30px',
+                            left: '90%',
+                            transform: 'translateX(-50%)',
+                            zIndex: '100', // Make sure the button stays above other content
+                        }}>
                             <Button
                                 style={{
-                                    backgroundColor: '#ff4757',
+                                    backgroundColor: 'rgba(255, 71, 87, 0.8)', // Use rgba for transparent background
                                     color: 'white',
-                                    borderRadius: '5px',
-                                    padding: '10px 15px',
+                                    borderRadius: '15px',
+                                    padding: '5px 5px',
                                     fontSize: '16px',
                                     cursor: 'pointer',
                                     transition: 'background-color 0.3s ease',
                                 }}
                                 onClick={handleLogOut}
-                            >
-                                Log Out <AiOutlineLogout style={{ marginLeft: '15px' }} />
+                            ><AiOutlineLogout style={{ marginLeft: '15px' }} />
                             </Button>
                         </div>
+
 
                         : <></>
                 }
