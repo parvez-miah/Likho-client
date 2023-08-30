@@ -23,6 +23,8 @@ const EditNote = () => {
     const handleEditClick = (index) => {
         const updatedData = [...newData];
         updatedData[index].isEditing = true;
+        updatedData[index].editedTitle = updatedData[index].title; // Initialize editedTitle
+        updatedData[index].editedDetails = updatedData[index].details; // Initialize editedDetails
         setNewData(updatedData);
     };
 
@@ -34,7 +36,7 @@ const EditNote = () => {
 
     const handleSaveClick = async (index) => {
         const editedNote = newData[index];
-        const response = await fetch(`http://localhost:5000/edit/${id}`, {
+        const response = await fetch(`https://likho-server.onrender.com/edit/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -78,7 +80,7 @@ const EditNote = () => {
         })
             .then(result => {
                 if (result.isConfirmed) {
-                    axios.delete(`http://localhost:5000/note/${id}`)
+                    axios.delete(`https://likho-server.onrender.com/note/${id}`)
                         .then(res => {
                             if (res.data.deletedCount === 1) {
                                 refetch();
@@ -109,12 +111,12 @@ const EditNote = () => {
                         <div style={{padding:'10px'}}>
                             <input
                                 type="text"
-                                value={note.editedTitle || note.title}
+                                value={note.editedTitle}
                                 onChange={(e) => handleInputChange(index, 'editedTitle', e.target.value)}
                                 className="title-input"
                             />
                             <textarea
-                                value={note.editedDetails || note.details}
+                                value={note.editedDetails}
                                 onChange={(e) => handleInputChange(index, 'editedDetails', e.target.value)}
                                 className="details-input"
                             />

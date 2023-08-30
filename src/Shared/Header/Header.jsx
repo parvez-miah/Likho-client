@@ -46,7 +46,7 @@ function Dashboard(props) {
             <Toolbar />
             <Divider />
             <List>
-                {['My Notes', 'Add a Note',].map((text, index) => (
+                {['My Notes', 'Add a Note'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <Link to={`/${text.split(' ').join('')}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                             <ListItemButton onClick={() => setMobileOpen(false)}>
@@ -86,27 +86,8 @@ function Dashboard(props) {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" noWrap component="div">
-                        <Link style={{ textDecoration: 'none', color: 'inherit', fontWeight:'700' }} to ="/">Lekho</Link>
-                        {
-                            user ?
-                                <Button
-                                    style={{
-                                        marginLeft: '90px',
-                                        backgroundColor: '#ff4757', // Stunning red color
-                                        color: 'white',
-                                        borderRadius: '5px',
-                                        padding: '10px 15px',
-                                        fontSize: '16px',
-                                        cursor: 'pointer',
-                                        transition: 'background-color 0.3s ease',
-                                    }}
-                                    onClick={handleLogOut}
-                                >
-                                    Log Out <AiOutlineLogout style={{ marginLeft: '5px' }} />
-                                </Button>
-                         
-: <></>
-                        }
+                        
+                        <Link to="/"> <img style={{ width: '150px', marginLeft:'-15px' , marginTop:'5px'}} src="https://i.ibb.co/R2RvgNW/0aa3a7e426db7f0c362c4e28bde227fa63c81bdf.png" alt="" /></Link>
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -148,7 +129,27 @@ function Dashboard(props) {
                     <Toolbar />
                    
                
-                  
+                {
+                    user ?
+                        <div style={{ position: 'absolute', bottom: '30px', left: '50%', transform: 'translateX(-50%)' }}>
+                            <Button
+                                style={{
+                                    backgroundColor: '#ff4757',
+                                    color: 'white',
+                                    borderRadius: '5px',
+                                    padding: '10px 15px',
+                                    fontSize: '16px',
+                                    cursor: 'pointer',
+                                    transition: 'background-color 0.3s ease',
+                                }}
+                                onClick={handleLogOut}
+                            >
+                                Log Out <AiOutlineLogout style={{ marginLeft: '15px' }} />
+                            </Button>
+                        </div>
+
+                        : <></>
+                }
                 </Box>
             </Box>
       

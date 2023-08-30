@@ -35,7 +35,7 @@ const NoteView = () => {
         })
             .then(result => {
                 if (result.isConfirmed) {
-                    axios.delete(`http://localhost:5000/note/${id}`)
+                    axios.delete(`https://likho-server.onrender.com/note/${id}`)
                         .then(res => {
                             if (res.data.deletedCount === 1) {
                                 refetch();

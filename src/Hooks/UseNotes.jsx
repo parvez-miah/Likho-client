@@ -10,7 +10,7 @@ const UseNotes = () => {
     const { refetch, data: notes = [], isLoading } = useQuery({
         queryKey: ['notes', user?.email],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/notes?email=${user?.email}`)
+            const res = await axios.get(`https://likho-server.onrender.com/notes?email=${user?.email}`)
             console.log('res from axios', res)
             return res.data;
         },

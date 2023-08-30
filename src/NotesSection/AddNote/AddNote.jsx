@@ -28,7 +28,7 @@ const AddNote = () => {
         const noteItem = {title, details, email: user.email };
 
 
-        axios.post('http://localhost:5000/notes', noteItem)
+        axios.post('https://likho-server.onrender.com/notes', noteItem)
         .then(data=>{
             if(data.data.insertedId){
                 const swalWithBootstrapButtons = Swal.mixin({
