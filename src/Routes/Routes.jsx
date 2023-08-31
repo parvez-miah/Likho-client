@@ -11,6 +11,7 @@ import Login from "../Authentication/Login/Login";
 import Secret from "../Pages/Secret/Secret";
 import NoteView from "../NotesSection/NoteView/NoteView";
 import EditNote from "../NotesSection/EditNote/EditNote";
+import Register from "../Authentication/Register/Register";
 
 const router = createBrowserRouter([
 
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             {
                 path:'/login',
                 element: <Login></Login>
+            },
+            {
+                path:'/register',
+                element: <Register></Register>
             },
             {
                 path:'/secret',

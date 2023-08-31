@@ -7,44 +7,77 @@ export const AuthContext = createContext(null);
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
+    const Googleprovider = new GoogleAuthProvider();
+
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
-    const googleProvider = new GoogleAuthProvider();
+
+    // create user
 
 
+    const createUser = (email, password) => {
+        return createUserWithEmailAndPassword(auth, email, password)
+    };
+
+
+    const updateUserProfile = ({ name, photo }) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name, photo
+        });
+    }
+
+    // login User
+
+
+    const signIn = (email, password) => {
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password)
+    };
+
+    // google sign In
 
     const googleSignIn = () => {
         setLoading(true);
-        return signInWithPopup(auth, googleProvider);
+        return signInWithPopup(auth, Googleprovider)
     }
+
+
+    // logOut
 
     const logOut = () => {
         setLoading(true);
         return signOut(auth);
     }
 
-   
-   
 
-
-
+    // state managements
     useEffect(() => {
+
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            console.log('current user', currentUser);
+        })
 
-        });
         return () => {
-            return unsubscribe();
+            return unsubscribe;
         }
-    }, [])
+    }, []);
+
+
+
+
 
     const authInfo = {
         user,
         loading,
-        googleSignIn,
+        createUser,
+        signIn,
         logOut,
+        error,
+        updateUserProfile,
+        googleSignIn
+
     }
 
     return (
