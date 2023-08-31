@@ -43,7 +43,6 @@ const Register = () => {
   return (
     <Container
       style={{
-        paddingLeft: '40px',
         animation: 'fadeInUp 0.8s ease',
       }}
       className="mt-5"
