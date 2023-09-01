@@ -21,10 +21,12 @@ const NotesHome = () => {
                 <div>
                     <h1 style={{ color: 'red' }}>
                         <SentimentVeryDissatisfiedIcon />
-                        Uhhh! Ahhh!
+                        Uhhh! Ahhh! Looks like there are no notes here! {' '}
                     </h1>
                     <h2>
-                        It's Look like there's no note exist here!{' '}
+                        
+                        <br />
+                        <br />
                         <Link to="/AddaNote">
                             <Badge> Add Your First Note</Badge>
                         </Link>

@@ -2,18 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import UseNotes from '../../Hooks/UseNotes';
 import './EditNote.css'
-import { FormControl, Spinner } from 'react-bootstrap';
+import {  Spinner } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { AiOutlineDelete } from 'react-icons/ai';
 import axios from 'axios';
-import { SaveAltOutlined, SaveAs } from '@mui/icons-material';
-import { TextField } from '@mui/material';
-
+import {  SaveAs } from '@mui/icons-material';
 const EditNote = () => {
     const { id } = useParams();
     const [newData, setNewData] = useState([]);
     const [notes, refetch, isLoading] = UseNotes();
     const navigate = useNavigate();
+    
     useEffect(() => {
         const found = notes.filter((note) => note._id === id);
         setNewData(found);
@@ -109,11 +108,19 @@ const EditNote = () => {
     });
 
     const HandleTextArea = (index, field, value) => {
-        setNote(prevState => ({
-            ...prevState,
-            [field]: value,
-        }));
+        const updatedData = [...newData];
+        updatedData[index][field] = value;
+        setNewData(updatedData);
+
+        // Automatically adjust textarea height
+        const textarea = document.getElementById(`details-textarea-${index}`);
+        if (textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = (textarea.scrollHeight) + 'px';
+        }
     };
+
+    
 
     return (
         <div className="notepad , tiro-bangla">
@@ -121,22 +128,28 @@ const EditNote = () => {
                 <div key={index} className={`note ${note.isEditing ? 'editing' : ''}`}>
                     {note.isEditing ? (
                         <div className="editing-container">
+                            {/* Existing title input */}
                             <input
                                 type="text"
                                 value={note.editedTitle}
                                 onChange={(e) => handleInputChange(index, 'editedTitle', e.target.value)}
                                 className="title-input"
                             />
-                           
+                            {/* New editedDetails textarea */}
                             <textarea
-                                multiline
-                                minRows={3}
-                                maxRows={10}
+                                id={`details-textarea-${index}`} // Add this line to set a unique id for each textarea
                                 value={note.editedDetails}
-                                onChange={(e) => HandleTextArea(0, 'editedDetails', e.target.value)}
+                                onChange={(e) => HandleTextArea(index, 'editedDetails', e.target.value)}
                                 className="details-input"
                                 placeholder="Enter your note here"
+                                ref={textarea => {
+                                    if (textarea) {
+                                        textarea.style.height = 'auto';
+                                        textarea.style.height = (textarea.scrollHeight) + 'px';
+                                    }
+                                }}
                             />
+                            {/* Existing buttons */}
                             <div className="buttons-container">
                                 <button onClick={() => handleSaveClick(index)} className="save-button">
                                     <SaveAs />
